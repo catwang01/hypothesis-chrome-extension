@@ -1,0 +1,11 @@
+.btnrow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnrow button {
+  background-color: beige;
+  border: 1px solid lightgray;
+  margin: 5px 5px;
+  padding: 5px 5px;
+}
