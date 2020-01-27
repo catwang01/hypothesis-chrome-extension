@@ -1,13 +1,27 @@
 import "../css/options.css";
 
+const syncBox = (boxId) => {
+  const checkbox = document.getElementById(boxId) 
+  const prop = checkbox.name;
 
+  console.log(prop)
+  chrome.storage.sync.get(prop, (data) => {
+    checkbox.checked = data[prop]
+  })
 
-function syncData(inputId, buttonId) {
+  checkbox.onclick = function (e) {
+    chrome.storage.sync.set({[prop]: checkbox.checked}, function() {
+      console.log(boxId + ' changed to ' + checkbox.checked);
+    })
+  }
+}
+
+const syncInput = (inputId, buttonId) => {
   
   const input = document.getElementById(inputId);
   const button = document.getElementById(buttonId);
   const prop = input.name;
-
+  console.log(prop)
   chrome.storage.sync.get(prop, (data) => {
     input.value = data[prop] || "None set";
   })
@@ -19,5 +33,12 @@ function syncData(inputId, buttonId) {
   }
 }
 
-syncData('hypTokenInput', 'hypTokenSubmit');
-syncData('hypUserInput', 'hypUserSubmit');
+
+const init = () => {
+  syncInput('hypTokenInput', 'hypTokenSubmit');
+  syncInput('hypUserInput', 'hypUserSubmit');
+  syncBox('autoFetch');
+  syncBox('autoCopy');
+}
+
+init();
