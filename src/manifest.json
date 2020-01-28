@@ -1,5 +1,7 @@
 {
-  "name": "Chrome Extension Webpack",
+  "name": "Fetch Hypothesis Annotations",
+  "description": "",
+  "version": "0.1.0",
   "options_page": "options.html",
   "background": {
     "page": "background.html"
