@@ -1,6 +1,8 @@
 # Hypothesis to bullets chrome extension
 
-## Run
+Browser extension for fetching and formatting [Hypothes.is](https://web.hypothes.is/about/) annotations into markdown bullet points, ready for copying into Roam, Notion or similar apps.
+
+## Install
 
 ```
 1. Run `npm start`
@@ -12,6 +14,12 @@
 ```
 
 More info on the upstream project: https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate
+
+## Run
+
+1. Open options page and add your details and preferences.
+2. Visit the page where you have annotations.
+3. Open the extension
 
 ## Credits
 
