@@ -1,7 +1,6 @@
 import queryString from "query-string";
-import fetch from "isomorphic-fetch";
+// import fetch from "isomorphic-fetch";
 import lodash from "lodash";
-
 import { getRoamDate } from "./index.js";
 
 const parseAnnotation = a => {
