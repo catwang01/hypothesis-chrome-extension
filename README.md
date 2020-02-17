@@ -13,11 +13,24 @@ Browser extension for fetching and formatting [Hypothes.is](https://web.hypothes
 
 More info on the upstream project: https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate
 
-## Run
+## Usage
 
 1. Open options page and add your details and preferences.
 2. Visit the page where you have annotations.
 3. Open the extension
+4. For local PDF support, right click -> Manage Extensions -> Allow access to file URLs
+
+## Changelog
+```
+0.2.0
+  Added PDF support
+0.1.0
+  Initial Version
+```
+
+## Known Issues
+- Only fetches the first 200 annotations from a page
+- Won't fetch annotations from PDFs while the official Hypothes.is browser extension is open 
 
 ## Credits
 
