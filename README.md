@@ -4,14 +4,12 @@ Browser extension for fetching and formatting [Hypothes.is](https://web.hypothes
 
 ## Install
 
-```
-1. Run `npm start`
+1. Run `npm build`
 2. Load your extension on Chrome following:
     1. Access `chrome://extensions/`
     2. Check `Developer mode`
     3. Click on `Load unpacked extension`
     4. Select the `build` folder.
-```
 
 More info on the upstream project: https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate
 
