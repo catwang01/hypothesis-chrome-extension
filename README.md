@@ -4,7 +4,16 @@ Browser extension for fetching and formatting [Hypothes.is](https://web.hypothes
 
 ## Install
 
-1. Run `npm build`
+### From zip
+1. Download the [latest release](https://github.com/dalmo3/hypothesis-to-bullets-chrome-extension/releases) and extract into a new folder
+2. Load your extension on Chrome following:
+    1. Access `chrome://extensions/`
+    2. Check `Developer mode`
+    3. Click on `Load unpacked extension`
+    4. Select the folder you created.
+
+### Using `npm`
+1. Run `npm run build`
 2. Load your extension on Chrome following:
     1. Access `chrome://extensions/`
     2. Check `Developer mode`
