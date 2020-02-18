@@ -24,10 +24,10 @@ More info on the upstream project: https://github.com/samuelsimoes/chrome-extens
 
 ## Usage
 
-1. Open options page and add your details and preferences.
+1. Open options page (Right-click on the extension) and add your details and preferences.
 2. Visit the page where you have annotations.
 3. Open the extension
-4. For local PDF support, right click -> Manage Extensions -> Allow access to file URLs
+4. For local PDF support, Right-click -> Manage Extensions -> Allow access to file URLs
 
 ## Changelog
 ```
