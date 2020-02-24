@@ -31,6 +31,8 @@ More info on the upstream project: https://github.com/samuelsimoes/chrome-extens
 
 ## Changelog
 ```
+0.2.1
+  Added some debug messages
 0.2.0
   Added PDF support
 0.1.0

@@ -32,8 +32,17 @@ const getAnnotations = async (token, annotatedUrl, user) => {
   };
   try {
     return await fetch(url, queryHeaders)
-      .then(e => e.json())
+      .then(async e => {
+        console.log(e);
+        const json = await e.json();
+        console.log(json)
+        return json
+      })
       .then(e => {
+
+        if (!e.rows.length){
+          return 'No annotations found'
+        }
         const article = lodash.get(e, "rows[0].document.title[0]");
         const updated = lodash.get(e, "rows[0].updated");
         const annotations = lodash

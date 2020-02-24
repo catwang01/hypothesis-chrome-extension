@@ -8,31 +8,25 @@ import pdfjsLib from 'pdfjs-dist';
 
 const getHypothesisURI = async () => 
   new Promise(res => {
-    chrome.tabs.query({ lastFocusedWindow: true, active: true }, async tabs => {
-      console.log(tabs)
+    chrome.tabs.query({ currentWindow: true, active: true }, async tabs => {
+    // chrome.tabs.query({ lastFocusedWindow: true, active: true }, async tabs => {
+      console.log('Tabs: :', tabs);
       const urlObject = new URL(tabs[0].url);
-      console.log(urlObject);
+      console.log('URL: ', urlObject.href);
   
       let url = decodeURI(urlObject.href.toString().replace(/#.*/, ''));
-      console.log('url1', url)
-      console.assert(urlObject.pathname === '/pdfjs/web/viewer.html')
       if (
         urlObject.href.endsWith('.pdf') ||
         urlObject.pathname.endsWith('.pdf') || 
         urlObject.pathname === '/pdfjs/web/viewer.html'
-      ) {
+        ) {
         if (urlObject.protocol === 'chrome-extension:') {
           url = decodeURIComponent(urlObject.search.slice(6));
-          console.log('url2', url)
         }
         const doc = await pdfjsLib.getDocument(url).promise;
-        // const doc = await pdfjsLib.getDocument(url).promise;
-        // console.log(doc);
-        console.log(doc.fingerprint);
+        console.log('PDF fingerprint: ', doc.fingerprint);
         res(`urn:x-pdf:${doc.fingerprint}`);
       } else {
-        console.log('pdfviewer ...... ');
-        console.log('url3', url)
         res(url);
       }
     });
@@ -67,7 +61,6 @@ const run = data => {
       // console.log(url);
       // console.log(hypUser, hypToken);
       const url = await getHypothesisURI();
-      console.log('url is ', url);
       const annotations = await hyp(url, hypUser, hypToken);
 
       const textArea = document.getElementById('annotationArea');
