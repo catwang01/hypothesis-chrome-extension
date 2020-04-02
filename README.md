@@ -39,6 +39,16 @@ More info on the upstream project: https://github.com/samuelsimoes/chrome-extens
   Initial Version
 ```
 
+## Troubleshooting
+
+If you're having trouble to fetch annotations or highlights on a specific page, 
+1. Right-click the extension button -> Inspect popup;
+1. On the Console:
+  1. Check if `URL` is correct
+  1. Check for `{total: 0, rows: Array(0)}`. Zero means nothing was found on Hypothes.is servers.
+  1. Check for general errror messages. Ignore `Uncaught (in promise) DOMException: Document is not focused.` for now;
+  1. Open an [issue](https://github.com/dalmo3/hypothesis-to-bullets-chrome-extension/issues)
+
 ## Known Issues
 - Only fetches the first 200 annotations from a page
 - Won't fetch annotations from PDFs while the official Hypothes.is browser extension is open 
