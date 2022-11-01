@@ -61,10 +61,13 @@ const run = data => {
       // console.log(url);
       // console.log(hypUser, hypToken);
       const url = await getHypothesisURI();
-      const annotations = await hyp(url, hypUser, hypToken);
+      // const annotations = await hyp(url, hypUser, hypToken);
 
-      const textArea = document.getElementById('annotationArea');
-      textArea.value = annotations;
+      const outputArea = document.getElementById('outputArea');
+      outputArea.replaceChild(await hyp(url, hypUser, hypToken), outputArea.childNodes[0]);
+      // textArea.value = annotations;
+      // const textArea = document.getElementById('annotationArea');
+      // textArea.value = annotations;
       // console.log(annotations);
 
       // auto copy to clipboard

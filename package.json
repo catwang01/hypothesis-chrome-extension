@@ -19,10 +19,8 @@
     "query-string": "^6.10.1",
     "style-loader": "1.0.0",
     "webpack": "4.41.2",
+    "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
-    "write-file-webpack-plugin": "4.5.1",
-    "webpack-cli": "3.3.10"
-  },
-  "dependencies": {
+    "write-file-webpack-plugin": "4.5.1"
   }
 }

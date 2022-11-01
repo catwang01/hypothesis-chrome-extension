@@ -18,6 +18,39 @@ const parseAnnotation = a => {
   return [quoteString, textString].join("\n");
 };
 
+const parseAnnotationMd = a => {
+  const textRaw = a.text;
+  const link = a.links['incontext']
+  const quotationRaw =
+    lodash.get(a, "target[0]selector") &&
+    a.target[0].selector.find(x => x.exact) &&
+    a.target[0].selector.find(x => x.exact).exact;
+  console.log({ a })
+  var div = document.createElement("div")
+  // let result = "";
+  const quotation = (quotationRaw || "").replace(/\n/g, " ");
+  // const text = (textRaw || "").replace(/\n/g, " ");
+  // const extraIndent = text ? "  " : "";
+  // const quoteString = quotation ? `    - ${quotation}` : "";
+  // const textString = text ? extraIndent + `    - ^^${text}^^` : "";
+  div.innerHTML = `
+  <div>
+> ${quotation} <br/>
+> <br/>
+> ${link} <br/>
+  </div>
+`
+  var button = document.createElement("button");
+  button.textContent = "copy"
+  button.onclick = function handleOnClick(e) { 
+    var text = div.children[0].textContent
+    navigator.clipboard.writeText(text)
+    console.log(`write into clipboard: ${text}`)
+  }
+  div.appendChild(button)
+  return div
+};
+
 const getAnnotations = async (token, annotatedUrl, user) => {
   const query = queryString.stringify({
     url: annotatedUrl,
@@ -45,7 +78,10 @@ const getAnnotations = async (token, annotatedUrl, user) => {
         }
         const article = lodash.get(e, "rows[0].document.title[0]");
         const updated = lodash.get(e, "rows[0].updated");
-        const annotations = lodash
+
+        var outputDiv = document.createElement("div");
+
+        var divs = lodash
           .orderBy(e.rows, f => {
             try {
               return lodash
@@ -55,13 +91,30 @@ const getAnnotations = async (token, annotatedUrl, user) => {
               return 0;
             }
           })
-          .map(x => parseAnnotation(x))
-          .join("\n");
-        const dateStr = getRoamDate(updated);
-        const bulletedAnnotations =
-        `- ${article}\n  - Source: ${annotatedUrl}\n${annotations}`
-        // console.log(bulletedAnnotations);
-        return bulletedAnnotations;
+          .map(x => parseAnnotationMd(x))
+        
+        divs.forEach(div => outputDiv.appendChild(div))
+
+        return outputDiv;
+
+
+        // const annotations = lodash
+        //   .orderBy(e.rows, f => {
+        //     try {
+        //       return lodash
+        //         .get(f, "target[0].selector")
+        //         .filter(x => x.type === "TextPositionSelector")[0].start;
+        //     } catch (e) {
+        //       return 0;
+        //     }
+        //   })
+        //   .map(x => parseAnnotation(x))
+        //   .join("\n");
+        // const dateStr = getRoamDate(updated);
+        // const bulletedAnnotations =
+        // `- ${article}\n  - Source: ${annotatedUrl}\n${annotations}`
+        // // console.log(bulletedAnnotations);
+        // return bulletedAnnotations;
       });
   } catch (e) {
     console.error(e);
