@@ -3,6 +3,20 @@ import queryString from "query-string";
 import lodash from "lodash";
 import { getRoamDate } from "./index.js";
 
+// from https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+const hash = (s) =>
+{
+  var hash = 0,
+  i, chr;
+  if (s.length === 0) return hash;
+  for (i = 0; i < s.length; i++) {
+    chr = s.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
 const parseAnnotation = a => {
   const textRaw = a.text;
   const quotationRaw =
@@ -33,13 +47,23 @@ const parseAnnotationMd = a => {
   // const extraIndent = text ? "  " : "";
   // const quoteString = quotation ? `    - ${quotation}` : "";
   // const textString = text ? extraIndent + `    - ^^${text}^^` : "";
+//   div.innerHTML = `
+//   <div>
+// > ${quotation} <br/>
+// > <br/>
+// > ${link} <br/>
+//   </div>
+// `
+  // const quotationId = hash(quotation);
+  const quotationId = a.id;
   div.innerHTML = `
-  <div>
-> ${quotation} <br/>
-> <br/>
-> ${link} <br/>
-  </div>
+<div>
+${quotation} [^${quotationId}] <br/>
+<br/>
+[^${quotationId}]: [${link}](${link}) <br/>
+</div>
 `
+
   var button = document.createElement("button");
   button.textContent = "copy"
   button.onclick = function handleOnClick(e) { 
